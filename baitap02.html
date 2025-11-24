@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 2: Form Đăng ký</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Bài Tập Lập Trình Web</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="baitap01.html">Bài 1: Sản phẩm</a></li>
+                    <li><a href="baitap02.html" class="active">Bài 2: Đăng ký</a></li>
+                    <li><a href="baitap03.html">Bài 3: Đếm ngược</a></li>
+                    <li><a href="about.html">Giới thiệu</a></li>
+                    <li><a href="contact.html">Liên hệ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="baitap-header">
+            <h2>Bài tập 2: Form Đăng ký (20 điểm)</h2>
+            <p class="description">Validate và lưu dữ liệu người dùng vào bộ nhớ</p>
+        </section>
+
+        <section class="form-section">
+            <div class="form-container">
+                <form id="registerForm" novalidate>
+                    <div class="form-group">
+                        <label for="userName">Tên người dùng <span class="required">*</span></label>
+                        <input type="text" id="userName" name="userName" placeholder="Nhập họ và tên" required>
+                        <span class="error-text" id="nameError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userEmail">Email <span class="required">*</span></label>
+                        <input type="email" id="userEmail" name="userEmail" placeholder="example@email.com" required>
+                        <span class="error-text" id="emailError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userPassword">Mật khẩu <span class="required">*</span></label>
+                        <div class="password-wrapper">
+                            <input type="password" id="userPassword" name="userPassword" placeholder="Nhập mật khẩu" required>
+                            <button type="button" id="togglePassword" class="toggle-password" aria-label="Hiện/ẩn mật khẩu">👁️</button>
+                        </div>
+                        <span class="error-text" id="passwordError"></span>
+                        <span class="hint">Ít nhất 8 ký tự, có chữ hoa, chữ thường và số</span>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label>
+                            <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                            Tôi đồng ý với <a href="#" class="terms-link" onclick="alert('Đây là nội dung điều khoản sử dụng'); return false;">điều khoản sử dụng</a>
+                        </label>
+                        <span class="error-text" id="termsError"></span>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Đăng ký</button>
+                        <button type="button" id="clearForm" class="btn btn-secondary">Xóa form</button>
+                    </div>
+                </form>
+
+                <div id="successMessage" class="success-message"></div>
+            </div>
+
+            <div class="registered-users">
+                <h3>Danh sách người dùng đã đăng ký:</h3>
+                <div id="usersList"></div>
+                <button id="clearStorage" class="btn btn-danger">Xóa tất cả dữ liệu</button>
+            </div>
+        </section>
+
+        <section class="logic-explanation">
+            <h3>📝 Giải thích Logic tư duy:</h3>
+            <div class="explanation-box">
+                <h4>1. Xử lý sự kiện Submit:</h4>
+                <ul>
+                    <li><strong>preventDefault():</strong> Ngăn form submit mặc định (reload page) để xử lý bằng JavaScript - cho phép kiểm soát hoàn toàn flow</li>
+                    <li><strong>novalidate attribute:</strong> Tắt HTML5 validation mặc định để tự xây dựng validation logic chi tiết hơn</li>
+                    <li><strong>Event Delegation:</strong> Gắn listener lên form thay vì từng input - giảm số lượng listeners, tối ưu performance</li>
+                    <li><strong>Form-level Validation:</strong> Kiểm tra toàn bộ form một lần trước khi submit - đảm bảo tất cả trường đều hợp lệ</li>
+                    <li><strong>Focus Management:</strong> Tự động focus vào trường lỗi đầu tiên để cải thiện UX</li>
+                </ul>
+
+                <h4>2. Validation Rules Chi tiết:</h4>
+                <ul>
+                    <li><strong>Name Validation:</strong> 
+                        <ul>
+                            <li>Tối thiểu 2 ký tự - loại bỏ input không hợp lệ</li>
+                            <li>Trim whitespace - xử lý khoảng trắng thừa đầu/cuối</li>
+                            <li>Sanitize trước khi lưu - tránh XSS</li>
+                        </ul>
+                    </li>
+                    <li><strong>Email Validation:</strong> 
+                        <ul>
+                            <li>RegEx pattern: <code>/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/</code></li>
+                            <li>Kiểm tra format cơ bản: local@domain.tld</li>
+                            <li>Không cho phép email có ký tự đặc biệt nguy hiểm</li>
+                            <li>Trong production: nên verify email bằng OTP/link xác nhận</li>
+                        </ul>
+                    </li>
+                    <li><strong>Password Validation (Strong Password):</strong> 
+                        <ul>
+                            <li>Độ dài tối thiểu 8 ký tự - tiêu chuẩn bảo mật cơ bản</li>
+                            <li>Có ít nhất 1 chữ hoa (A-Z) - tăng entropy</li>
+                            <li>Có ít nhất 1 chữ thường (a-z) - đa dạng ký tự</li>
+                            <li>Có ít nhất 1 số (0-9) - thêm độ phức tạp</li>
+                            <li>Có thể thêm: ký tự đặc biệt (!@#$%^&*) cho password mạnh hơn</li>
+                            <li>Không chứa thông tin cá nhân (tên, email) - tránh dễ đoán</li>
+                        </ul>
+                    </li>
+                    <li><strong>Terms Checkbox:</strong> 
+                        <ul>
+                            <li>Required field - không cho submit nếu chưa đồng ý</li>
+                            <li>Link đến điều khoản thực tế - tuân thủ pháp luật</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h4>3. Bảo mật dữ liệu trong In-Memory Storage:</h4>
+                <ul>
+                    <li><strong>Tại sao KHÔNG dùng localStorage:</strong>
+                        <ul>
+                            <li>localStorage không được hỗ trợ trong môi trường Claude.ai artifacts</li>
+                            <li>Dữ liệu trong localStorage có thể bị đọc bởi scripts khác (XSS risk)</li>
+                            <li>Không có cơ chế bảo mật tích hợp - dữ liệu plain text</li>
+                        </ul>
+                    </li>
+                    <li><strong>In-Memory Storage Implementation:</strong>
+                        <ul>
+                            <li>Object literal để lưu trữ: <code>const storage = { data: {} }</code></li>
+                            <li>Data tồn tại trong session - mất khi reload page</li>
+                            <li>Không persist - phù hợp cho demo/testing</li>
+                            <li>Nhanh hơn localStorage vì không có I/O disk</li>
+                        </ul>
+                    </li>
+                    <li><strong>Password Hashing:</strong>
+                        <ul>
+                            <li>Sử dụng btoa() để encode base64 - CHỈ cho demo</li>
+                            <li>Base64 KHÔNG phải encryption - có thể decode dễ dàng</li>
+                            <li>Production PHẢI dùng: bcrypt, scrypt, argon2 ở backend</li>
+                            <li>KHÔNG BAO GIỜ lưu plaintext password</li>
+                            <li>KHÔNG BAO GIỜ hash password ở frontend trong production</li>
+                        </ul>
+                    </li>
+                    <li><strong>Input Sanitization:</strong>
+                        <ul>
+                            <li>Loại bỏ HTML tags trước khi lưu - tránh stored XSS</li>
+                            <li>Escape special characters: &lt;, &gt;, &amp;, ", '</li>
+                            <li>Trim whitespace - clean data</li>
+                            <li>Validate type và format - đảm bảo data integrity</li>
+                        </ul>
+                    </li>
+                    <li><strong>JSON Handling:</strong>
+                        <ul>
+                            <li>Try-catch khi parse JSON - xử lý corrupted data</li>
+                            <li>Validate structure sau khi parse - đảm bảo có đủ fields</li>
+                            <li>Default empty array nếu không có data</li>
+                        </ul>
+                    </li>
+                    <li><strong>Security Best Practices:</strong>
+                        <ul>
+                            <li>HTTPS only trong production - bảo vệ data in transit</li>
+                            <li>CSRF tokens cho form submission</li>
+                            <li>Rate limiting để tránh brute force</li>
+                            <li>Server-side validation LUÔN BẮT BUỘC - frontend có thể bypass</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h4>4. UX Improvements:</h4>
+                <ul>
+                    <li><strong>Toggle Password Visibility:</strong> Cho phép user xem password khi typing - giảm lỗi nhập</li>
+                    <li><strong>Real-time Feedback:</strong> Hiển thị lỗi ngay khi blur khỏi input - phát hiện lỗi sớm</li>
+                    <li><strong>Success Animation:</strong> Hiển thị message thành công với slide-down animation</li>
+                    <li><strong>Clear Form Button:</strong> Reset toàn bộ form và errors - tiện lợi cho user</li>
+                    <li><strong>Display Registered Users:</strong> Hiển thị danh sách users đã đăng ký - feedback trực quan</li>
+                    <li><strong>Confirm Dialog:</strong> Xác nhận trước khi xóa tất cả data - tránh thao tác nhầm</li>
+                    <li><strong>Password Strength Indicator:</strong> Có thể thêm màu đỏ/vàng/xanh để chỉ độ mạnh password</li>
+                    <li><strong>Auto-focus:</strong> Focus vào trường đầu tiên khi load page</li>
+                </ul>
+
+                <h4>5. Production Deployment Considerations:</h4>
+                <ul>
+                    <li><strong>Backend API:</strong> POST data đến server endpoint (e.g., /api/register)</li>
+                    <li><strong>Database:</strong> Lưu vào MySQL/PostgreSQL/MongoDB thay vì memory</li>
+                    <li><strong>Email Verification:</strong> Gửi email xác nhận sau khi đăng ký</li>
+                    <li><strong>reCAPTCHA:</strong> Thêm CAPTCHA để tránh bot spam</li>
+                    <li><strong>Session Management:</strong> Tạo session/JWT token sau khi đăng ký thành công</li>
+                    <li><strong>Error Logging:</strong> Log errors ra server để monitor và debug</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Bài Tập Web - MSSV: 707-MSSV</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

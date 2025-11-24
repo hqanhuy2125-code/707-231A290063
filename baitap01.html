@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 1: Danh sách Sản phẩm</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Bài Tập Lập Trình Web</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="baitap01.html" class="active">Bài 1: Sản phẩm</a></li>
+                    <li><a href="baitap02.html">Bài 2: Đăng ký</a></li>
+                    <li><a href="baitap03.html">Bài 3: Đếm ngược</a></li>
+                    <li><a href="about.html">Giới thiệu</a></li>
+                    <li><a href="contact.html">Liên hệ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="baitap-header">
+            <h2>Bài tập 1: Danh sách Sản phẩm (20 điểm)</h2>
+            <p class="description">Tìm kiếm sản phẩm không phân biệt hoa thường với xử lý an toàn</p>
+        </section>
+
+        <section class="search-section">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm...">
+                <button id="searchBtn" class="btn btn-primary">Tìm kiếm</button>
+                <button id="resetBtn" class="btn btn-secondary">Đặt lại</button>
+            </div>
+            <div id="errorMessage" class="error-message"></div>
+        </section>
+
+        <section class="products-grid">
+            <!-- Sản phẩm 1 -->
+            <div class="product-card" data-name="laptop dell xps 13" data-category="laptop" data-description="laptop cao cấp màn hình 13 inch">
+                <div class="product-image">
+                    <img src="images/dell.jpg" alt="Laptop Dell XPS 13" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3>Laptop Dell XPS 13</h3>
+                    <p class="product-description">Laptop cao cấp, màn hình 13 inch</p>
+                    <p class="product-price">25.000.000đ</p>
+                    <span class="product-category">Laptop</span>
+                </div>
+            </div>
+
+            <!-- Sản phẩm 2 -->
+            <div class="product-card" data-name="iphone 15 pro max" data-category="điện thoại" data-description="smartphone flagship của apple">
+                <div class="product-image">
+                    <img src="images/15prm.jpg" alt="iPhone 15 Pro Max" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3>iPhone 15 Pro Max</h3>
+                    <p class="product-description">Smartphone flagship của Apple</p>
+                    <p class="product-price">35.000.000đ</p>
+                    <span class="product-category">Điện thoại</span>
+                </div>
+            </div>
+
+            <!-- Sản phẩm 3 -->
+            <div class="product-card" data-name="samsung galaxy s24 ultra" data-category="điện thoại" data-description="android flagship tốt nhất">
+                <div class="product-image">
+                    <img src="images/S24U.jpg" alt="Samsung Galaxy S24 Ultra" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3>Samsung Galaxy S24 Ultra</h3>
+                    <p class="product-description">Android flagship tốt nhất</p>
+                    <p class="product-price">32.000.000đ</p>
+                    <span class="product-category">Điện thoại</span>
+                </div>
+            </div>
+
+            <!-- Sản phẩm 4 -->
+            <div class="product-card" data-name="macbook pro m3" data-category="laptop" data-description="laptop cho chuyên gia sáng tạo">
+                <div class="product-image">
+                    <img src="images/M3.jpg" alt="MacBook Pro M3" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3>MacBook Pro M3</h3>
+                    <p class="product-description">Laptop cho chuyên gia sáng tạo</p>
+                    <p class="product-price">45.000.000đ</p>
+                    <span class="product-category">Laptop</span>
+                </div>
+            </div>
+
+            <!-- Sản phẩm 5 -->
+            <div class="product-card" data-name="ipad pro 12.9" data-category="tablet" data-description="máy tính bảng cao cấp">
+                <div class="product-image">
+                    <img src="images/Pro.jpg" alt="iPad Pro 12.9" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3>iPad Pro 12.9</h3>
+                    <p class="product-description">Máy tính bảng cao cấp</p>
+                    <p class="product-price">28.000.000đ</p>
+                    <span class="product-category">Tablet</span>
+                </div>
+            </div>
+
+            <!-- Sản phẩm 6 -->
+            <div class="product-card" data-name="sony wh-1000xm5" data-category="tai nghe" data-description="tai nghe chống ồn tốt nhất">
+                <div class="product-image">
+                    <img src="images/XM5.jpg" alt="Sony WH-1000XM5" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3>Sony WH-1000XM5</h3>
+                    <p class="product-description">Tai nghe chống ồn tốt nhất</p>
+                    <p class="product-price">8.500.000đ</p>
+                    <span class="product-category">Tai nghe</span>
+                </div>
+            </div>
+
+            <!-- Sản phẩm 7 -->
+            <div class="product-card" data-name="airpods pro 2" data-category="tai nghe" data-description="tai nghe true wireless của apple">
+                <div class="product-image">
+                    <img src="images/AP2.jpg" alt="AirPods Pro 2" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3>AirPods Pro 2</h3>
+                    <p class="product-description">Tai nghe true wireless của Apple</p>
+                    <p class="product-price">6.500.000đ</p>
+                    <span class="product-category">Tai nghe</span>
+                </div>
+            </div>
+
+            <!-- Sản phẩm 8 -->
+            <div class="product-card" data-name="samsung odyssey g9" data-category="màn hình" data-description="màn hình gaming cong 49 inch">
+                <div class="product-image">
+                    <img src="images/G9.jpg" alt="Samsung Odyssey G9" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3>Samsung Odyssey G9</h3>
+                    <p class="product-description">Màn hình gaming cong 49 inch</p>
+                    <p class="product-price">35.000.000đ</p>
+                    <span class="product-category">Màn hình</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="logic-explanation">
+            <h3>📝 Giải thích Logic tư duy:</h3>
+            <div class="explanation-box">
+                <h4>1. Xử lý Input để tránh lỗi Injection:</h4>
+                <ul>
+                    <li><strong>Trim và Sanitize:</strong> Loại bỏ khoảng trắng thừa và ký tự đặc biệt nguy hiểm bằng cách sử dụng textContent thay vì innerHTML</li>
+                    <li><strong>Escape HTML:</strong> Function sanitizeInput() chuyển đổi các ký tự đặc biệt (&lt;, &gt;, &amp;, ", ') thành HTML entities để tránh XSS attacks</li>
+                    <li><strong>Validation:</strong> Kiểm tra độ dài input (không quá 50 ký tự) và không để trống</li>
+                    <li><strong>RegEx Filter:</strong> Chỉ cho phép chữ cái (bao gồm tiếng Việt có dấu), số và khoảng trắng - từ chối các ký tự script nguy hiểm</li>
+                </ul>
+
+                <h4>2. Tối ưu Tìm kiếm:</h4>
+                <ul>
+                    <li><strong>toLowerCase():</strong> Chuyển cả keyword và dữ liệu về chữ thường để so sánh không phân biệt hoa thường - phương pháp đơn giản và hiệu quả</li>
+                    <li><strong>includes():</strong> Tìm kiếm substring nhanh hơn regex cho trường hợp đơn giản - độ phức tạp O(n*m) nhưng tốc độ thực tế rất nhanh</li>
+                    <li><strong>Data Attributes:</strong> Sử dụng data-* attributes để lưu thông tin tìm kiếm, giúp tách biệt logic tìm kiếm và hiển thị</li>
+                    <li><strong>querySelectorAll:</strong> Duyệt qua tất cả sản phẩm một lần - với dữ liệu nhỏ (< 100 items) rất hiệu quả</li>
+                    <li><strong>CSS Display Toggle:</strong> Ẩn/hiện sản phẩm bằng CSS thay vì tạo lại DOM - tăng performance đáng kể</li>
+                </ul>
+
+                <h4>3. Xử lý Error & UX:</h4>
+                <ul>
+                    <li><strong>Validate trước khi search:</strong> Kiểm tra input hợp lệ ngay từ đầu để tránh lãng phí tài nguyên xử lý</li>
+                    <li><strong>Thông báo rõ ràng:</strong> Hiển thị message cụ thể cho từng loại lỗi (input rỗng, quá dài, ký tự không hợp lệ, không tìm thấy)</li>
+                    <li><strong>Lazy Loading Images:</strong> Sử dụng loading="lazy" cho ảnh để tối ưu performance - chỉ load ảnh khi cần</li>
+                    <li><strong>Alt Text:</strong> Mỗi ảnh có alt text rõ ràng cho accessibility và SEO</li>
+                    <li><strong>Reset function:</strong> Cho phép user dễ dàng xóa search và xem lại toàn bộ danh sách</li>
+                    <li><strong>Enter key support:</strong> Hỗ trợ phím Enter để tìm kiếm nhanh hơn</li>
+                </ul>
+
+                <h4>4. Security Best Practices:</h4>
+                <ul>
+                    <li><strong>No eval():</strong> Không bao giờ sử dụng eval() hoặc Function() constructor với user input</li>
+                    <li><strong>Content Security Policy:</strong> Trong production nên thêm CSP headers để chặn inline scripts</li>
+                    <li><strong>Input Length Limit:</strong> Giới hạn độ dài để tránh DoS attacks thông qua input dài vô hạn</li>
+                    <li><strong>Client-side validation:</strong> Validate ở frontend nhưng LUÔN phải validate lại ở backend khi có API</li>
+                </ul>
+
+                <h4>5. Hướng dẫn thêm ảnh sản phẩm:</h4>
+                <div style="background: #fff; padding: 1rem; border-radius: 5px; margin-top: 1rem;">
+                    <p><strong>📁 Tạo thư mục:</strong> <code>images/products/</code></p>
+                    <p><strong>📸 Thêm ảnh với tên file như sau:</strong></p>
+                    <ul>
+                        <li>laptop-dell-xps-13.jpg</li>
+                        <li>iphone-15-pro-max.jpg</li>
+                        <li>samsung-galaxy-s24.jpg</li>
+                        <li>macbook-pro-m3.jpg</li>
+                        <li>ipad-pro-129.jpg</li>
+                        <li>sony-wh-1000xm5.jpg</li>
+                        <li>airpods-pro-2.jpg</li>
+                        <li>samsung-odyssey-g9.jpg</li>
+                    </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Bài Tập Web - MSSV: 707-MSSV</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

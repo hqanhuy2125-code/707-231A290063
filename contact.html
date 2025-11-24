@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liên hệ</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Bài Tập Lập Trình Web</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="baitap01.html">Bài 1: Sản phẩm</a></li>
+                    <li><a href="baitap02.html">Bài 2: Đăng ký</a></li>
+                    <li><a href="baitap03.html">Bài 3: Đếm ngược</a></li>
+                    <li><a href="about.html">Giới thiệu</a></li>
+                    <li><a href="contact.html" class="active">Liên hệ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="contact-section">
+            <h2>Liên hệ</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Thông tin liên hệ</h3>
+                    <div class="contact-item">
+                        <strong>📧 Email:</strong>
+                        <p>example@email.com</p>
+                    </div>
+                    <div class="contact-item">
+                        <strong>📱 Điện thoại:</strong>
+                        <p>0123 456 789</p>
+                    </div>
+                    <div class="contact-item">
+                        <strong>🏫 Địa chỉ:</strong>
+                        <p>Trường Đại học XYZ<br>
+                        Thành phố ABC, Việt Nam</p>
+                    </div>
+                    <div class="contact-item">
+                        <strong>🌐 GitHub:</strong>
+                        <p><a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a></p>
+                    </div>
+                </div>
+
+                <div class="contact-form-wrapper">
+                    <h3>Gửi tin nhắn</h3>
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-group">
+                            <label for="contactName">Họ tên</label>
+                            <input type="text" id="contactName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactEmail">Email</label>
+                            <input type="email" id="contactEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactMessage">Tin nhắn</label>
+                            <textarea id="contactMessage" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Gửi tin nhắn</button>
+                    </form>
+                    <div id="contactSuccess" class="success-message"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Bài Tập Web - MSSV: 707-MSSV</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

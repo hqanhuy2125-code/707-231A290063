@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 3: Đồng hồ Đếm ngược</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Bài Tập Lập Trình Web</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="baitap01.html">Bài 1: Sản phẩm</a></li>
+                    <li><a href="baitap02.html">Bài 2: Đăng ký</a></li>
+                    <li><a href="baitap03.html" class="active">Bài 3: Đếm ngược</a></li>
+                    <li><a href="about.html">Giới thiệu</a></li>
+                    <li><a href="contact.html">Liên hệ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="baitap-header">
+            <h2>Bài tập 3: Đồng hồ Đếm ngược (20 điểm)</h2>
+            <p class="description">Timer 10 phút với animation và modal alert</p>
+        </section>
+
+        <section class="timer-section">
+            <div class="timer-container">
+                <div id="timerDisplay" class="timer-display">10:00</div>
+                <div class="timer-controls">
+                    <button id="startBtn" class="btn btn-success">Bắt đầu</button>
+                    <button id="pauseBtn" class="btn btn-warning" disabled>Tạm dừng</button>
+                    <button id="resetBtn" class="btn btn-danger">Đặt lại</button>
+                </div>
+                <div class="timer-info">
+                    <p id="timerStatus">Sẵn sàng</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal Alert -->
+        <div id="timerModal" class="modal">
+            <div class="modal-content">
+                <span class="modal-close">&times;</span>
+                <h2>⏰ Hết giờ!</h2>
+                <p>Đồng hồ đếm ngược đã kết thúc.</p>
+                <button id="modalCloseBtn" class="btn btn-primary">Đóng</button>
+            </div>
+        </div>
+
+        <section class="logic-explanation">
+            <h3>📝 Giải thích Logic tư duy:</h3>
+            <div class="explanation-box">
+                <h4>1. Xử lý setInterval để tránh Memory Leak:</h4>
+                <ul>
+                    <li><strong>clearInterval:</strong> Luôn clear interval trước khi tạo mới hoặc khi component unmount</li>
+                    <li><strong>Single Instance:</strong> Đảm bảo chỉ có 1 interval chạy tại 1 thời điểm</li>
+                    <li><strong>Check trước khi Start:</strong> Kiểm tra xem đã có interval chưa</li>
+                    <li><strong>Cleanup on Pause/Reset:</strong> Clear interval khi pause hoặc reset</li>
+                    <li><strong>Use let/const:</strong> Khai báo biến interval trong scope phù hợp</li>
+                </ul>
+
+                <h4>2. Logic Timer:</h4>
+                <ul>
+                    <li><strong>Countdown từ 600s (10 phút):</strong> Giảm 1 giây mỗi interval</li>
+                    <li><strong>Format MM:SS:</strong> Chuyển seconds thành phút:giây (padStart để có 2 chữ số)</li>
+                    <li><strong>State Management:</strong> Quản lý trạng thái: running, paused, stopped</li>
+                    <li><strong>Boundary Check:</strong> Dừng khi về 0, không cho số âm</li>
+                </ul>
+
+                <h4>3. Animation khi < 1 phút:</h4>
+                <ul>
+                    <li><strong>CSS Class Toggle:</strong> Thêm class "warning" khi còn < 60s</li>
+                    <li><strong>Keyframe Animation:</strong> Pulse, color change, scale effect</li>
+                    <li><strong>Conditional Styling:</strong> CSS khác nhau cho warning state</li>
+                </ul>
+
+                <h4>4. Tích hợp với Domain/Hosting:</h4>
+                <ul>
+                    <li><strong>Client-side Timer:</strong> Chạy hoàn toàn trên browser, không cần server</li>
+                    <li><strong>Đồng bộ Server Time (Nếu cần):</strong>
+                        <ul>
+                            <li>Fetch server time qua API: <code>fetch('/api/time')</code></li>
+                            <li>Tính offset giữa client và server</li>
+                            <li>Adjust timer based on offset</li>
+                            <li>Periodic sync để correct drift</li>
+                        </ul>
+                    </li>
+                    <li><strong>Deploy Considerations:</strong>
+                        <ul>
+                            <li>Static hosting: Chỉ cần HTML/CSS/JS files</li>
+                            <li>CDN: Cache static assets</li>
+                            <li>Service Worker: Offline capability</li>
+                        </ul>
+                    </li>
+                    <li><strong>Performance:</strong>
+                        <ul>
+                            <li>Use requestAnimationFrame cho smooth animation</li>
+                            <li>Debounce rapid clicks</li>
+                            <li>Lazy load modal content</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h4>5. Modal Alert:</h4>
+                <ul>
+                    <li>Hiển thị khi timer về 0</li>
+                    <li>Overlay để focus attention</li>
+                    <li>Close button và click outside to close</li>
+                    <li>Accessibility: ESC key, focus trap</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Bài Tập Web - MSSV: 707-MSSV</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
